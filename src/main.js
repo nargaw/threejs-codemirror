@@ -1,7 +1,8 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls, plane } from 'three/examples/jsm/Addons.js'
-import * as fragmentShader from './Shaders/fragment.glsl'
+import fragmentShader from './Shaders/fragment.glsl'
+import vertexShader from './Shaders/vertex.glsl'
 
 //canvas
 const canvas = document.querySelector('#webgl')
@@ -32,7 +33,10 @@ controls.update()
 
 //shader plane
 const planeGeometry = new THREE.PlaneGeometry(1, 1, 10, 10)
-const planeMaterial = new THREE.ShaderMaterial()
+const planeMaterial = new THREE.ShaderMaterial({
+ fragmentShader: fragmentShader,
+ vertexShader: vertexShader 
+})
 const shaderPlane = new THREE.Mesh(planeGeometry, planeMaterial)
 scene.add(shaderPlane)
 
