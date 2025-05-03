@@ -18,7 +18,6 @@ let height = window.innerHeight
 const fov = 45
 const aspect = width/height
 const camera = new THREE.PerspectiveCamera(fov, aspect, 1, 100)
-camera.position.set(0, 0, 3)
 
 //renderer
 const renderer = new THREE.WebGLRenderer({canvas})
@@ -31,9 +30,16 @@ const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 controls.update()
 
+const uniforms = {
+  u_time: {
+    value: new THREE.Uniform()
+  } 
+}
+
 //shader plane
-const planeGeometry = new THREE.PlaneGeometry(1, 1, 10, 10)
+const planeGeometry = new THREE.PlaneGeometry(2, 2)
 const planeMaterial = new THREE.ShaderMaterial({
+  uniforms: uniforms,
  fragmentShader: fragmentShader,
  vertexShader: vertexShader 
 })
@@ -55,6 +61,7 @@ const clock = new THREE.Clock()
 //animate
 const animate = () => {
   window.requestAnimationFrame(animate)
+  uniforms.u_time.value = clock.getElapsedTime()
   controls.update()
   renderer.render(scene, camera)
 }
