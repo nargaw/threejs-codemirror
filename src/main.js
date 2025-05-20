@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { OrbitControls, plane } from 'three/examples/jsm/Addons.js'
 import fragmentShader from './Shaders/fragment.glsl'
 import vertexShader from './Shaders/vertex.glsl'
+import view from './codemirror'
 
 //canvas
 const canvas = document.querySelector('#webgl')

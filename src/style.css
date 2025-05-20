@@ -60,6 +60,14 @@ h1 {
   overflow: hidden;
 }
 
+#editor{
+  position: fixed;
+  z-index: 1;
+  top: 5vh;
+  padding: 10px;
+
+}
+
 .card {
   padding: 2em;
 }
