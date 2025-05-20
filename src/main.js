@@ -3,7 +3,9 @@ import * as THREE from 'three'
 import { OrbitControls, plane } from 'three/examples/jsm/Addons.js'
 import fragmentShader from './Shaders/fragment.glsl'
 import vertexShader from './Shaders/vertex.glsl'
-import view from './codemirror'
+import { basicSetup, EditorView } from "codemirror";
+import { EditorState } from "@codemirror/state";
+import { glsl } from 'codemirror-lang-glsl';
 
 //canvas
 const canvas = document.querySelector('#webgl')
@@ -36,7 +38,8 @@ const uniforms = {
     value: new THREE.Uniform()
   } 
 }
-
+//fragment
+let fragment
 //shader plane
 const planeGeometry = new THREE.PlaneGeometry(2, 2)
 const planeMaterial = new THREE.ShaderMaterial({
@@ -46,6 +49,24 @@ const planeMaterial = new THREE.ShaderMaterial({
 })
 const shaderPlane = new THREE.Mesh(planeGeometry, planeMaterial)
 scene.add(shaderPlane)
+
+const view = new EditorView({
+    state: EditorState.create({
+        doc: fragmentShader,
+        extensions: [
+            basicSetup, 
+            glsl(), 
+            EditorView.updateListener.of((update) => {
+                if(update.docChanged){
+                    const newFrag = view.state.doc.toString()
+                    planeMaterial.fragmentShader = newFrag
+                    planeMaterial.needsUpdate = true
+                }
+            })
+        ]
+    }),
+    parent: document.querySelector('#editor'),
+})
 
 //resize
 window.onresize = () =>{
