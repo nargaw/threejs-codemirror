@@ -1,6 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
-import { OrbitControls, plane } from 'three/examples/jsm/Addons.js'
+import { OrbitControls } from 'three/examples/jsm/Addons.js'
 import fragmentShader from './Shaders/fragment.glsl'
 import vertexShader from './Shaders/vertex.glsl'
 import { basicSetup, EditorView } from "codemirror";
@@ -36,10 +36,12 @@ controls.update()
 const uniforms = {
   u_time: {
     value: new THREE.Uniform()
-  } 
+  },
+  u_resolution: { 
+    value: new THREE.Vector2(window.innerWidth, window.innerHeight) 
+  }
 }
-//fragment
-let fragment
+
 //shader plane
 const planeGeometry = new THREE.PlaneGeometry(2, 2)
 const planeMaterial = new THREE.ShaderMaterial({
@@ -62,7 +64,8 @@ const view = new EditorView({
                     planeMaterial.fragmentShader = newFrag
                     planeMaterial.needsUpdate = true
                 }
-            })
+            }),
+            
         ]
     }),
     parent: document.querySelector('#editor'),
@@ -75,6 +78,7 @@ window.onresize = () =>{
   renderer.setSize(width, height)
   camera.aspect = width/height
   camera.updateProjectionMatrix()
+  uniforms.u_resolution.value = new THREE.Vector2(width, height)
 }
 
 //time
