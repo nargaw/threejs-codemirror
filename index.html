@@ -7,9 +7,24 @@
     <title>Shader</title>
   </head>
   <body>
+    <nav class="tabs">
+      <a href="1.html" class="tab">1</a>
+      <a href="2.html" class="tab">2</a>
+      <a href="3.html" class="tab">3</a>
+      <a href="4.html" class="tab">4</a>
+      <a href="5.html" class="tab">5</a>
+    </nav>
     <div id="app"></div>
     <div id="editor"></div>
     <canvas id="webgl"></canvas>
     <script type="module" src="/src/main.js"></script>
+    <script>
+      const current = window.location.pathname;
+      document.querySelectorAll('.tab').forEach(tab => {
+        if (tab.getAttribute('href') === current.slice(1)) {
+          tab.classList.add('active');
+        }
+      });
+    </script>
   </body>
 </html>
