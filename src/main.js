@@ -58,8 +58,9 @@ const fragments = {
   5: frag5,
 };
 
-const pageNumber = location.pathname.split('/').pop().replace('.html', '');
-let currentFragment = fragments[pageNumber];
+//get fragment shader
+const getPageNumber = () => location.hash.replace('#', '') || '0';
+let currentFragment = fragments[getPageNumber()] || fragments[0];
 if(!currentFragment) currentFragment = fragments[0]
 
 //shader plane
@@ -72,24 +73,33 @@ const planeMaterial = new THREE.ShaderMaterial({
 const shaderPlane = new THREE.Mesh(planeGeometry, planeMaterial)
 scene.add(shaderPlane)
 
+//code mirror setup
 const view = new EditorView({
     state: EditorState.create({
         doc: currentFragment,
         extensions: [
             basicSetup, 
             glsl(),
-            EditorView.updateListener.of((update) => {
-                if(update.docChanged){
-                    const newFrag = view.state.doc.toString()
-                    planeMaterial.fragmentShader = newFrag
-                    planeMaterial.needsUpdate = true
-                }
-            }),
-            
         ]
     }),
     parent: document.querySelector('#editor'),
 })
+
+//update shader and page
+const loadShader = (frag) => {
+  view.dispatch({
+    changes: { from: 0, to: view.state.doc.length, insert: frag }
+  });
+  planeMaterial.fragmentShader = frag;
+  planeMaterial.needsUpdate = true;
+};
+
+//listen for hash change
+window.addEventListener("hashchange", () => {
+  const newPage = getPageNumber();
+  const frag = fragments[newPage] || fragments[0];
+  loadShader(frag);
+});
 
 //resize
 window.onresize = () =>{
