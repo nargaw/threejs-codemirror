@@ -18,22 +18,20 @@
   overflow: hidden;
 }
 
-#editor{
-  position: fixed;
-  z-index: 1;
-  top: 10vh;
-  padding: 10px;
-
-}
-
 #editor {
   font-family: 'Fira Code', monospace;
   font-size: 14px;
   background-color: #1e1e1e80;
   color: white;
-  
+  position: fixed;
+  z-index: 1;
+  top: 10vh;
+  padding: 10px;
 }
 
+.cm-gutter{
+  background-color: #1f1f1f;
+}
 
 /* Navigation Tabs */
 nav.tabs {
