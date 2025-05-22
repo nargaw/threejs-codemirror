@@ -68,6 +68,14 @@ h1 {
 
 }
 
+#editor {
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  background-color: #1e1e1e80;
+  color: white;
+  
+}
+
 .card {
   padding: 2em;
 }
