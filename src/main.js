@@ -61,7 +61,6 @@ const fragments = {
 //get fragment shader
 const getPageNumber = () => location.hash.replace('#', '') || '0';
 let currentFragment = fragments[getPageNumber()] || fragments[0];
-if(!currentFragment) currentFragment = fragments[0]
 
 //shader plane
 const planeGeometry = new THREE.PlaneGeometry(2, 2)
@@ -80,6 +79,13 @@ const view = new EditorView({
         extensions: [
             basicSetup, 
             glsl(),
+            EditorView.updateListener.of((update) => {
+              if(update.docChanged){
+                  const newFrag = view.state.doc.toString()
+                  planeMaterial.fragmentShader = newFrag
+                  planeMaterial.needsUpdate = true
+              }
+          }),
         ]
     }),
     parent: document.querySelector('#editor'),
