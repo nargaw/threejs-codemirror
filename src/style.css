@@ -13,7 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-#webgl{
+#webgl {
   position: fixed;
   overflow: hidden;
 }
@@ -21,15 +21,16 @@
 #editor {
   font-family: 'Fira Code', monospace;
   font-size: 14px;
-  background-color: #1e1e1e80;
+  background-color: #1f1f1f50;
   color: white;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   top: 10vh;
-  padding: 10px;
+  padding: 0px;
+  overflow: auto;
 }
 
-.cm-gutter{
+.cm-gutter {
   background-color: #1f1f1f;
 }
 
@@ -52,7 +53,9 @@ nav.tabs a.tab {
   color: #333;
   border-radius: 6px;
   font-weight: 500;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
 nav.tabs a.tab:hover {

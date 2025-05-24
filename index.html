@@ -8,6 +8,7 @@
   </head>
   <body>
     <nav class="tabs">
+      <a href="#0" class="tab">Home</a>
       <a href="#1" class="tab">1</a>
       <a href="#2" class="tab">2</a>
       <a href="#3" class="tab">3</a>
@@ -20,14 +21,17 @@
     <script type="module" src="/src/main.js"></script>
     <script>
       const setActiveTab = () => {
-      const currentHash = window.location.hash || '#1';
-      document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.toggle('active', tab.getAttribute('href') === currentHash);
+        const currentHash = window.location.hash || '#1';
+        document.querySelectorAll('.tab').forEach((tab) => {
+          tab.classList.toggle(
+            'active',
+            tab.getAttribute('href') === currentHash
+          );
         });
       };
 
-    window.addEventListener('hashchange', setActiveTab);
-    window.addEventListener('load', setActiveTab);
+      window.addEventListener('hashchange', setActiveTab);
+      window.addEventListener('load', setActiveTab);
     </script>
   </body>
 </html>

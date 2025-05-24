@@ -2,7 +2,7 @@ varying vec2 vUv;
 uniform float u_time;
 uniform vec2 u_resolution;
 
-void main(){
+void main() {
   vec2 uv = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
   float radius = 0.25;
 
@@ -13,7 +13,7 @@ void main(){
   float sdf = dist - radius;
 
   // Visualize: map distance to color
-  vec3 color;  
-  color = mix(vec3(0., 1., 1.), color, smoothstep(0.0, 0.005, abs(sdf)));
+  vec3 color;
+  color = mix(vec3(0.0, 1.0, 1.0), color, smoothstep(0.0, 0.005, abs(sdf)));
   gl_FragColor = vec4(color, 1.0);
 }
