@@ -91,6 +91,7 @@ const customDarkTheme = EditorView.theme(
 );
 
 const view = new EditorView({
+  lineWrapping: true,
   state: EditorState.create({
     doc: currentFragment,
     extensions: [
@@ -107,6 +108,15 @@ const view = new EditorView({
     ]
   }),
   parent: document.querySelector('#editor')
+});
+
+const toggleBtn = document.getElementById('toggle-btn');
+const editorElement = document.querySelector('#editor');
+
+toggleBtn.addEventListener('click', () => {
+  const isHidden = editorElement.style.display === 'none';
+  editorElement.style.display = isHidden ? 'block' : 'none';
+  toggleBtn.textContent = isHidden ? 'Hide Editor' : 'Show Editor';
 });
 
 //update shader and page

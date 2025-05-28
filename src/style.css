@@ -28,6 +28,28 @@
   top: 10vh;
   padding: 0px;
   overflow: auto;
+  white-space: pre-wrap !important;
+  word-break: break-word;
+}
+
+#toggle-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#toggle-btn:hover {
+  background-color: #357abd;
 }
 
 .cm-gutter {
