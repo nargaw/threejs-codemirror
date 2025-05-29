@@ -99,6 +99,7 @@ const view = new EditorView({
       glsl(),
       oneDark,
       customDarkTheme,
+      EditorView.lineWrapping,
       EditorView.updateListener.of((update) => {
         if (update.docChanged) {
           const newFrag = view.state.doc.toString();
