@@ -75,5 +75,9 @@ void main() {
 
   float x = f;
 
+  float mask = length(uv) - 0.05;
+
+  color = mix(vec3(0.), color, smoothstep(0., 0.5, mask));
+
   gl_FragColor = vec4(color * x, 1.0);
 }
