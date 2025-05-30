@@ -25,7 +25,7 @@
   color: white;
   position: absolute;
   z-index: 1;
-  top: 10vh;
+  /* top: 10; */
   padding: 0px;
   overflow: auto;
   white-space: pre-wrap !important;

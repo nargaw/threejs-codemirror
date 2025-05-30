@@ -1,6 +1,5 @@
 import './style.css';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import frag0 from './Shaders/frag0.glsl?raw';
 import frag1 from './Shaders/frag1.glsl?raw';
 import frag2 from './Shaders/frag2.glsl?raw';
@@ -34,18 +33,13 @@ renderer.setSize(width, height);
 renderer.setClearColor(new THREE.Color('#1f1f1f'));
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
 
-//camera controls
-const controls = new OrbitControls(camera, canvas);
-controls.enableDamping = true;
-controls.update();
-
 const uniforms = {
   u_time: {
-    value: new THREE.Uniform()
+    value: new THREE.Uniform(),
   },
   u_resolution: {
-    value: new THREE.Vector2(window.innerWidth, window.innerHeight)
-  }
+    value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+  },
 };
 
 const fragments = {
@@ -54,7 +48,7 @@ const fragments = {
   2: frag2,
   3: frag3,
   4: frag4,
-  5: frag5
+  5: frag5,
 };
 
 //get fragment shader
@@ -66,7 +60,7 @@ const planeGeometry = new THREE.PlaneGeometry(2, 2);
 const planeMaterial = new THREE.ShaderMaterial({
   uniforms: uniforms,
   fragmentShader: currentFragment,
-  vertexShader: vertexShader
+  vertexShader: vertexShader,
 });
 const shaderPlane = new THREE.Mesh(planeGeometry, planeMaterial);
 scene.add(shaderPlane);
@@ -75,7 +69,7 @@ const updateShader = (newFrag) => {
   const newMaterial = new THREE.ShaderMaterial({
     uniforms: uniforms,
     fragmentShader: newFrag,
-    vertexShader: vertexShader
+    vertexShader: vertexShader,
   });
   shaderPlane.material.dispose(); // Clean up the old material
   shaderPlane.material = newMaterial;
@@ -84,8 +78,8 @@ const updateShader = (newFrag) => {
 const customDarkTheme = EditorView.theme(
   {
     '&': {
-      backgroundColor: '#000000a0 !important' // Your custom background color
-    }
+      backgroundColor: '#000000a0 !important', // Your custom background color
+    },
   },
   { dark: true }
 );
@@ -105,10 +99,10 @@ const view = new EditorView({
           const newFrag = view.state.doc.toString();
           updateShader(newFrag);
         }
-      })
-    ]
+      }),
+    ],
   }),
-  parent: document.querySelector('#editor')
+  parent: document.querySelector('#editor'),
 });
 
 const toggleBtn = document.getElementById('toggle-btn');
@@ -123,7 +117,7 @@ toggleBtn.addEventListener('click', () => {
 //update shader and page
 const loadShader = (frag) => {
   view.dispatch({
-    changes: { from: 0, to: view.state.doc.length, insert: frag }
+    changes: { from: 0, to: view.state.doc.length, insert: frag },
   });
   planeMaterial.fragmentShader = frag;
   planeMaterial.needsUpdate = true;
@@ -153,7 +147,6 @@ const clock = new THREE.Clock();
 const animate = () => {
   window.requestAnimationFrame(animate);
   uniforms.u_time.value = clock.getElapsedTime();
-  controls.update();
   renderer.render(scene, camera);
 };
 

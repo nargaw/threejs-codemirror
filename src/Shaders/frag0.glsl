@@ -69,9 +69,17 @@ void main() {
     clamp(f * f * 5.0, 0.0, 1.0)
   );
 
-  color = mix(color, vec3(0.0, 0.8, 0.94706), clamp(length(q), 0.0, 1.0));
+  color = mix(
+    color, 
+    vec3(0.0, 0.8, 0.94706), 
+    clamp(length(q), 0.0, 1.0)
+  );
 
-  color = mix(color, vec3(0.166667, 0.1, 0.2), clamp(length(r.x), 0.0, 0.2));
+  color = mix(
+    color, 
+    vec3(0.166667, 0.1, 0.2), 
+    clamp(length(r.x), 0.0, 0.2)
+  );
 
   float x = f;
 
