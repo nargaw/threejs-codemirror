@@ -66,16 +66,16 @@ void main() {
   color = mix(
     vec3(0.901961, 0.619608, 0.666667),
     vec3(0.966667, 0.666667, 0.098039),
-    clamp(f * f * 5.0, 0.0, 1.0)
+    clamp(f * f , 0.0, 1.0)
   );
 
-  color = mix(
+  color -= 1. - mix(
     color, 
     vec3(0.0, 0.8, 0.94706), 
     clamp(length(q), 0.0, 1.0)
   );
 
-  color = mix(
+  color += mix(
     color, 
     vec3(0.166667, 0.1, 0.2), 
     clamp(length(r.x), 0.0, 0.2)
@@ -87,5 +87,5 @@ void main() {
 
   color = mix(vec3(0.0), color, smoothstep(0.0, 0.5, mask));
 
-  gl_FragColor = vec4(color * x, 1.0);
+  gl_FragColor = vec4(color * x * x * x * x, 1.0);
 }
