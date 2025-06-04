@@ -268,10 +268,9 @@ void main( void ) {
     vec2 position = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
     
     vec2 newUv = position;
-    float an = -u_time * 0.5;
     float r1 = length(newUv) ;
-    float a = -atan(newUv.x, newUv.y) * 0.425;
-    newUv = vec2(0.5/r1 + .95 + -u_time * 0.15 + r1, a );
+    float a = -atan(newUv.x, newUv.y) * 0.45;
+    newUv = vec2(0.25/r1  + -u_time * 0.15, a );
 
 	vec3 mat = matrix(vec2(newUv.y, newUv.x));
     vec3 color = vec3(0., 0., 0.);
