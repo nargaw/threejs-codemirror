@@ -5,6 +5,8 @@ uniform vec2 u_resolution;
 #define PI 3.1415926538
 #define TWO_PI 6.28318530718
 
+//Circle function
+//The length function is a built in GLSL function that finds the Euclidean Distance  
 float circle(vec2 coords, float size){
   return length(coords) - size;
 }
