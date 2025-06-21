@@ -13,7 +13,7 @@ void main() {
   //circle sdf
 
   //radius
-  float radius = abs(sin(u_time)) / 4.0 + 0.125;
+  float radius = 0.25;
 
   // Compute distance from the center (origin)
   float dist = length(uv) - radius;
