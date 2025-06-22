@@ -2,26 +2,35 @@ varying vec2 vUv;
 uniform float u_time;
 uniform vec2 u_resolution;
 
+//circle sdf function
+  float circleSdf(vec2 coords, float radius){
+    float distValue = length(coords) - radius;
+    return distValue;
+  }
+
 void main() {
   //our coordinate system
-  vec2 uv = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
-  //each point on this coordinate system is centered at (0, 0)
-
+  //the center is (0, 0)
+  vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
+  
   // Visualize: map distance to color
   vec3 color; //(x, y, z or r, g, b)
-
-  //circle sdf
 
   //radius
   float radius = 0.25;
 
-  // Compute distance from the center (origin)
-  float dist = length(uv) - radius;
+  //circle signed distance field
+  //inside the circle is negative
+  //outside the circle is positive
+  //on the cirlce is 0
+  float circle = circleSdf(coords, radius);
 
-  if (dist <= 0.0) {
-    color = vec3(0.0, 1.0, 0.0);
+  //all the positions on the coordinate system that are 0 and negative will be colored green
+  //all the positions on the coordinate system that are greater than 0 will be colored red
+  if (circle <= 0.0) {
+    color = vec3(0.0, 1.0, 0.0); //green
   } else {
-    color = vec3(1.0, 0.0, 0.0);
+    color = vec3(0.0, 0.0, 1.0); //red
   }
 
   gl_FragColor = vec4(color, 1.0);
