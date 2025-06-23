@@ -26,7 +26,7 @@ void main(void ) {
 
   vec3 color;
 
-  color = mix(vec3(0., 1., 0.), color, smoothstep(0., 0.1, dotGrid));
+  color = mix(vec3(0.0, 1.0, 0.0), color, smoothstep(0.0, 0.1, dotGrid));
 
   gl_FragColor = vec4(color, 1.0);
 }

@@ -30,15 +30,15 @@ void main(void ) {
   vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
 
   vec2 warpedCoords = warpCoords(coords, u_time);
-  
+
   float dotGrid = grid(warpedCoords);
 
   vec3 color;
 
-  color = mix(vec3(0., 1., 0.), color, smoothstep(0., 0.1, dotGrid));
+  color = mix(vec3(0.0, 1.0, 0.0), color, smoothstep(0.0, 0.1, dotGrid));
 
   float circleMask = length(coords);
-  
+
   color = mix(vec3(0.0), color, smoothstep(0.0, 0.45, circleMask));
 
   gl_FragColor = vec4(color, 1.0);

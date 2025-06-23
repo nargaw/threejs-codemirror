@@ -11,18 +11,18 @@ float circle(vec2 coords, float size) {
   return length(coords) - size;
 }
 
-float randFloat(float x){
+float randFloat(float x) {
   return fract(sin(x) * 4748393.7585);
 }
-  
-float randVec2(vec2 vUv){
+
+float randVec2(vec2 vUv) {
   return fract(sin(dot(vUv.yx, vec2(48.48929, 76.83929))) * 727827.3738);
 }
 
 vec3 matrix(vec2 vUv) {
   float rows = 15.0;
   vec2 a = floor(vUv * rows);
-  a += vec2(1., floor(u_time * 10.0 * randFloat(a.x)));
+  a += vec2(1.0, floor(u_time * 10.0 * randFloat(a.x)));
   vec2 b = fract(vUv * rows);
   float str = randVec2(a);
   float shape = circle(b - 0.5, 0.25);
