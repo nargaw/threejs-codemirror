@@ -19,15 +19,15 @@ float grid(vec2 coords) {
   return shape;
 }
 
-vec2 gridCoordsVisual(vec2 coords){
-  float gridSize = 3.;
+vec2 gridCoordsVisual(vec2 coords) {
+  float gridSize = 3.0;
   vec2 gridCoords = fract(coords * gridSize);
   return gridCoords;
 }
 
 void main(void ) {
   vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
-coords += 0.5;
+  coords += 0.5;
   float dotGrid = grid(coords);
 
   vec3 color;
@@ -35,8 +35,8 @@ coords += 0.5;
   color = mix(vec3(0.0, 1.0, 0.0), color, smoothstep(0.0, 0.1, dotGrid));
 
   vec2 newCoords = gridCoordsVisual(coords);
-  
-  gl_FragColor = vec4(vec2(newCoords), 0., 1.0);
-  gl_FragColor = vec4(vec2(coords), 0., 1.0);
-  gl_FragColor = vec4(color, 1.);
+
+  gl_FragColor = vec4(vec2(newCoords), 0.0, 1.0);
+  gl_FragColor = vec4(vec2(coords), 0.0, 1.0);
+  gl_FragColor = vec4(color, 1.0);
 }
