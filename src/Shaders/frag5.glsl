@@ -19,35 +19,38 @@ float randVec2(vec2 vUv) {
   return fract(sin(dot(vUv.yx, vec2(48.48929, 76.83929))) * 727827.3738);
 }
 
-vec3 matrix(vec2 vUv) {
+//create a grid of dots
+float grid(vec2 coords) {
   float rows = 15.0;
-  vec2 a = floor(vUv * rows);
+  vec2 a = floor(coords * rows);
   a += vec2(1.0, floor(u_time * 10.0 * randFloat(a.x)));
-  vec2 b = fract(vUv * rows);
+  vec2 b = fract(coords * rows);
   float str = randVec2(a);
-  float shape = circle(b - 0.5, 0.25);
-  shape = 1.0 - smoothstep(0.0, 0.05, shape);
-  return vec3(shape * str);
+  float shape = circle(b - 0.5, 0.35);
+  return shape * str;
 }
 
-vec2 warpUv(vec2 uv, float time) {
-  float r1 = length(uv);
-  float a = -atan(uv.x, uv.y) * 0.445;
-  vec2 vUv = vec2(0.25 / r1 + -time * 0.15, a);
-  return vUv;
+vec2 warpCoords(vec2 coords, float time) {
+  float radius = length(coords);
+  float angle = -atan(coords.x, coords.y) * 0.445;
+  vec2 warpedCoord = vec2(0.25 / radius + -time * 0.15, angle);
+  return warpedCoord;
 }
 
 void main(void ) {
-  vec2 position = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
+  vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
 
-  vec2 newUv = position;
-  newUv = warpUv(newUv, u_time);
+  vec2 warpedCoords = warpCoords(coords, u_time);
 
-  vec3 mat = matrix(vec2(newUv.y, newUv.x));
-  vec3 color = vec3(0.0, 0.0, 0.0);
+  float dotGrid = grid(vec2(warpedCoords.y, warpedCoords.x));
 
-  color.g += mat.g;
-  float x = length(position);
-  color = mix(vec3(0.0), color, smoothstep(0.0, 0.45, x));
+  vec3 color;
+
+  color = mix(vec3(0.0, 1.0, 0.0), color, smoothstep(-0.1, 0.0, dotGrid));
+
+  float circleMask = length(coords);
+
+  color = mix(vec3(0.0), color, smoothstep(0.0, 0.45, circleMask));
+
   gl_FragColor = vec4(color, 1.0);
 }
