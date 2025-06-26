@@ -22,7 +22,8 @@ float grid(vec2 coords) {
 vec2 warpCoords(vec2 coords, float time) {
   float radius = length(coords);
   float angle = -atan(coords.x, coords.y) * 0.445;
-  vec2 warpedCoord = vec2(0.25 / radius + -time * 0.15, angle);
+  // vec2 warpedCoord = vec2(0.25 / radius + -time * 0.15, angle);
+  vec2 warpedCoord = vec2(mod(0.25/ radius + time * 0.25, 1.), angle);
   return warpedCoord;
 }
 
