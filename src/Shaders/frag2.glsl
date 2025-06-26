@@ -32,7 +32,8 @@ void main(void ) {
 
   vec3 color;
 
-  color = mix(vec3(0.0, 1.0, 0.0), color, smoothstep(0.0, 0.1, dotGrid));
+  // dotGrid <= 0.0 ? color = vec3(0., 1., 0.) : color = vec3(0.);
+  color = mix(vec3(0.0, 1.0, 0.0), color, smoothstep(0.0, 0.05, dotGrid));
 
   vec2 newCoords = gridCoordsVisual(coords);
 
