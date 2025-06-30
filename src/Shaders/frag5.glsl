@@ -21,19 +21,19 @@ float randVec2(vec2 vUv) {
 
 //create a grid of dots
 float grid(vec2 coords) {
-  float rows = 15.0;
+  float rows = 115.0;
   vec2 a = floor(coords * rows);
-  a += vec2(1.0, floor(u_time * 15.0 * randFloat(a.x)));
+  a += vec2(1., floor(u_time * 50.0 * randFloat(a.x)));
   vec2 b = fract(coords * rows);
   float str = randVec2(a);
   float shape = circle(b - 0.5, 0.35);
-  return shape * str;
+  return shape + str;
 }
 
 vec2 warpCoords(vec2 coords, float time) {
-  float radius = length(coords);
-  float angle = -atan(coords.x, coords.y) * 0.445;
-  vec2 warpedCoord = vec2(mod(0.25/ radius + time * 0.125, 5.), angle);
+  float radius = length(coords); //get euclidean distance
+  float angle = atan(coords.y, coords.x); //get angle in radians
+  vec2 warpedCoord = vec2(0.25 / radius + (u_time * 0.25), angle / PI); //polar coordinate as (radius, angle)
   return warpedCoord;
 }
 
@@ -46,7 +46,7 @@ void main(void ) {
 
   vec3 color;
 
-  color = mix(vec3(0.0, 1.0, 0.0), color, smoothstep(-0.1, 0.0, dotGrid));
+  color = mix(vec3(0.0, 1.0, 0.0), color, smoothstep(-0.05, 0.0, dotGrid));
 
   float circleMask = length(coords);
 
