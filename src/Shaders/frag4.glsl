@@ -20,9 +20,9 @@ float grid(vec2 coords) {
 }
 
 vec2 warpCoords(vec2 coords, float time) {
-  float radius = length(coords);
-  float angle = -atan(coords.x, coords.y) * 0.445;
-  vec2 warpedCoord = vec2(mod(0.25/ radius + time * 0.125, 5.), angle);
+  float radius = length(coords); //get euclidean distance
+  float angle = atan(coords.y, coords.x); //get angle in radians
+  vec2 warpedCoord = vec2(0.25 / radius + (u_time * 0.25), angle / PI); //polar coordinate as (radius, angle)
   return warpedCoord;
 }
 
