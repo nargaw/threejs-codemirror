@@ -23,7 +23,7 @@ float randVec2(vec2 vUv) {
 float grid(vec2 coords) {
   float rows = 115.0;
   vec2 a = floor(coords * rows);
-  a += vec2(1., floor(u_time * 50.0 * randFloat(a.x)));
+  a += vec2(1., floor(u_time * 10. * randFloat(a.x) ));
   vec2 b = fract(coords * rows);
   float str = randVec2(a);
   float shape = circle(b - 0.5, 0.35);
