@@ -20,15 +20,35 @@ float randVec2(vec2 vUv) {
 }
 
 //create a grid of dots
-float grid(vec2 coords) {
-  float rows = 115.0;
-  vec2 a = floor(coords * rows);
-  a += vec2(1., floor(u_time * 10. * randFloat(a.x) ));
-  vec2 b = fract(coords * rows);
-  float str = randVec2(a);
-  float shape = circle(b - 0.5, 0.35);
-  return shape + str;
-}
+// float grid(vec2 coords) {
+//   float rows = 115.0;
+//   vec2 a = floor(coords * rows);
+//   a.y += vec2(1., floor(u_time * 10. * randFloat(a.x) )).y;
+//   vec2 b = fract(coords * rows);
+//   float str = randVec2(a);
+//   float shape = circle(b - 0.5, 0.35);
+//   return shape + str;
+// }
+
+// vec2 patternCoords(vec2 coords, vec2 gridSize, float time){
+//   vec2 ipos = floor(coords);
+//   vec2 fpos = fract(coords);
+//   vec2 vel = vec2(time * 0.25 * max(gridSize.x, gridSize.y));
+//   vel *= vec2(-1.0, 0.0) * randFloat(1.0 + ipos.y);
+//   return vel;
+// }
+
+float matrix(vec2 vUv){
+        float rows = 50.0;
+        vec2 a = floor(vUv * rows);
+        a += vec2(1.0, floor(50. * randFloat(a.x)));
+        vec2 b = fract(vUv * rows);
+        
+        float shape = circle(b - 0.5, 0.35);
+        float str = randVec2(a);
+        return shape * str ;
+    }
+
 
 vec2 warpCoords(vec2 coords, float time) {
   float radius = length(coords); //get euclidean distance
@@ -42,7 +62,8 @@ void main(void ) {
 
   vec2 warpedCoords = warpCoords(coords, u_time);
 
-  float dotGrid = grid(vec2(warpedCoords.y, warpedCoords.x));
+  // float dotGrid = grid(vec2(warpedCoords.y, warpedCoords.x));
+  float dotGrid = matrix(vec2(warpedCoords.y, warpedCoords.x));
 
   vec3 color;
 

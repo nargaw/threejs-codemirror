@@ -13,7 +13,7 @@ float circle(vec2 coords, float size) {
 
 //create a grid of dots
 float grid(vec2 coords) {
-  float rows = 12.0;
+  float rows = 10.0;
   vec2 gridCoords = fract(coords * rows);
   float shape = circle(gridCoords - 0.5, 0.25);
   return shape;
