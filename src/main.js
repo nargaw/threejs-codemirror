@@ -48,7 +48,6 @@ const fragments = {
   2: frag2,
   3: frag3,
   4: frag4,
-  5: frag5,
 };
 
 //get fragment shader
