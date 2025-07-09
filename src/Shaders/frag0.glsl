@@ -28,10 +28,10 @@ vec2 toPolarCoords(vec2 coords, float time) {
 void main(void ) {
   //Cartesian Coordinates of fragments
   vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
-  
-  //instantiate color of fragments 
+
+  //instantiate color of fragments
   vec3 color;
-  
+
   //first convert to Polar Coordinate system
   vec2 polarCoords = toPolarCoords(coords, u_time);
 
