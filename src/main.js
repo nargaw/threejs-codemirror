@@ -5,7 +5,6 @@ import frag1 from './Shaders/frag1.glsl?raw';
 import frag2 from './Shaders/frag2.glsl?raw';
 import frag3 from './Shaders/frag3.glsl?raw';
 import frag4 from './Shaders/frag4.glsl?raw';
-import frag5 from './Shaders/frag5.glsl?raw';
 import vertexShader from './Shaders/vertex.glsl';
 import { basicSetup, EditorView } from 'codemirror';
 import { EditorState } from '@codemirror/state';

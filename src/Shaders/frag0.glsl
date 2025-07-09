@@ -4,8 +4,8 @@ uniform vec2 u_resolution;
 #define PI (3.1415926538)
 
 //Circle function
-//The length function is a built in GLSL function that finds the Euclidean Distance
-float circle(vec2 coords, float size) {
+//The length function is a built in GLSL function that finds the Euclidean Distance from the center to each fragment
+float circleSDF(vec2 coords, float size) {
   return length(coords) - size;
 }
 
@@ -13,8 +13,8 @@ float circle(vec2 coords, float size) {
 float grid(vec2 coords) {
   float gridSize = 10.0;
   vec2 gridCoords = fract(coords * gridSize);
-  float shape = circle(gridCoords - 0.5, 0.25);
-  return shape;
+  float circle = circleSDF(gridCoords - 0.5, 0.25);
+  return circle;
 }
 
 //Convert from Cartesian coordinate system to a Polar Coordinate System

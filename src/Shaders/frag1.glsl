@@ -1,31 +1,31 @@
 uniform float u_time;
 uniform vec2 u_resolution;
 
-//circle sdf function
-float circleSdf(vec2 coords, float radius) {
-  float distValue = length(coords) - radius;
-  return distValue;
+//Circle function
+//The length function is a built in GLSL function that finds the Euclidean Distance from the center to each fragment
+float circleSDF(vec2 coords, float size) {
+  return length(coords) - size;
 }
 
 void main() {
-  //our coordinate system
+  //Cartesian Coordinates of fragments
   //the center is (0, 0)
   vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
 
-  // Visualize: map distance to color
-  vec3 color; //(x, y, z or r, g, b)
+  //Color of fragments
+  //(r, g, b)
+  vec3 color;
 
   //radius
   float radius = 0.25;
 
-  //circle signed distance field
   //inside the circle is negative
   //outside the circle is positive
   //on the cirlce is 0
-  float circle = circleSdf(coords, radius);
+  float circle = circleSDF(coords, radius);
 
-  //all the positions on the coordinate system that are 0 and negative will be colored green
-  //all the positions on the coordinate system that are greater than 0 will be colored red
+  //all fragments on the coordinate system that are 0 and negative will be colored green
+  //all fragments on the coordinate system that are greater than 0 will be colored red
   if (circle <= 0.0) {
     color = vec3(0.0, 1.0, 0.0); //green
   } else {
