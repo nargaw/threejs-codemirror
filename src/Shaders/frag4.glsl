@@ -30,21 +30,30 @@ vec2 toPolarCoords(vec2 coords, float time) {
 }
 
 void main(void ) {
+  //Cartesian Coordinates of fragments
   vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
 
+  //Convert cartesian coordinates to polar coordinates
   vec2 polarCoords = toPolarCoords(coords, u_time);
 
+  //Turn coordinates into a grid 
   vec2 dotGridCoords = convertToGrid(polarCoords);
 
+  //Draw circles inside gird of coordinates
   float circles = circleSDF(dotGridCoords - 0.5, 0.25);
 
+  //Color Value
   vec3 color;
 
+  //color the circles green and smooth the edges
   color = mix(vec3(0.0, 1.0, 0.0), color, smoothstep(0.0, 0.05, circles));
 
+  //mask the moire distortion in the middle with a circle using original cartesian coordinates
   float circleMask = length(coords);
 
+  //draw the circleMask on top of the previously drawn circles
   color = mix(vec3(0.0), color, smoothstep(0.0, 0.45, circleMask));
 
+  //final shader output
   gl_FragColor = vec4(color, 1.0);
 }

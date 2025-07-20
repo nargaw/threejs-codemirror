@@ -9,15 +9,19 @@ float circleSDF(vec2 coords, float size) {
   return length(coords) - size;
 }
 
-//create a grid of dots
-float grid(vec2 coords) {
+//create a Coordinate of grids
+//first multiply by the gridSize
+//second take only the fractional part of the coordinate system
+vec2 convertToGrid(vec2 coords) {
   float gridSize = 10.0;
   vec2 gridCoords = fract(coords * gridSize);
-  float circle = circleSDF(gridCoords - 0.5, 0.25);
-  return circle;
+  return gridCoords;
 }
 
 //Convert from Cartesian coordinate system to a Polar Coordinate System
+//first find length of each fragment from the center
+//second find the angle in radians
+//return (radius, angle) instead of (x, y)
 vec2 toPolarCoords(vec2 coords, float time) {
   float radius = length(coords); //get euclidean distance
   float angle = atan(coords.y, coords.x); //get angle in radians
@@ -29,21 +33,27 @@ void main(void ) {
   //Cartesian Coordinates of fragments
   vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
 
-  //instantiate color of fragments
-  vec3 color;
-
-  //first convert to Polar Coordinate system
+  //Convert cartesian coordinates to polar coordinates
   vec2 polarCoords = toPolarCoords(coords, u_time);
 
-  //second draw dot of grids on polar coordinate system
-  float dotGrid = grid(polarCoords);
+  //Turn coordinates into a grid 
+  vec2 dotGridCoords = convertToGrid(polarCoords);
 
-  //color dots
-  color = mix(vec3(0.0, 1.0, 0.0), color, smoothstep(0.0, 0.05, dotGrid));
+  //Draw circles inside gird of coordinates
+  float circles = circleSDF(dotGridCoords - 0.5, 0.25);
 
-  //mask the moire effect on cartesian coords
+  //Color Value
+  vec3 color;
+
+  //color the circles green and smooth the edges
+  color = mix(vec3(0.0, 1.0, 0.0), color, smoothstep(0.0, 0.05, circles));
+
+  //mask the moire distortion in the middle with a circle using original cartesian coordinates
   float circleMask = length(coords);
+
+  //draw the circleMask on top of the previously drawn circles
   color = mix(vec3(0.0), color, smoothstep(0.0, 0.45, circleMask));
 
+  //final shader output
   gl_FragColor = vec4(color, 1.0);
 }
