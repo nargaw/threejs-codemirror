@@ -36,7 +36,7 @@ void main(void ) {
   //Convert cartesian coordinates to polar coordinates
   vec2 polarCoords = toPolarCoords(coords, u_time);
 
-  //Turn coordinates into a grid 
+  //Turn coordinates into a grid
   vec2 dotGridCoords = convertToGrid(polarCoords);
 
   //Draw circles inside gird of coordinates

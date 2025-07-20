@@ -23,7 +23,9 @@ void main(void ) {
 
   vec3 color;
 
-  circles <= 0.0 ? color = vec3(0., 1., 0.) : color = vec3(0., 0., 0.);
+  circles <= 0.0
+    ? color = vec3(0.0, 1.0, 0.0)
+    : color = vec3(0.0, 0.0, 0.0);
 
   gl_FragColor = vec4(vec2(gridCoords), 0.0, 1.0);
   gl_FragColor = vec4(color, 1.0);
