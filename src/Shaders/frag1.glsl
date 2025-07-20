@@ -13,7 +13,7 @@ void main() {
   vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
 
   //Color of fragments
-  //(r, g, b)
+  //(r, g, b) - vector 3 
   vec3 color;
 
   //radius
@@ -25,7 +25,7 @@ void main() {
   float circle = circleSDF(coords, radius);
 
   //all fragments on the coordinate system that are 0 and negative will be colored green
-  //all fragments on the coordinate system that are greater than 0 will be colored red
+  //all fragments on the coordinate system that are greater than 0 will be colored black
   if (circle <= 0.0) {
     color = vec3(0.0, 1.0, 0.0); //green
   } else {

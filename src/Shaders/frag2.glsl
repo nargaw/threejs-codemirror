@@ -17,16 +17,27 @@ vec2 convertToGrid(vec2 coords) {
 }
 
 void main(void ) {
+  //Cartesian Coordinates of fragments
   vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
-  vec2 gridCoords = convertToGrid(coords);
-  float circles = circleSDF(gridCoords - 0.5, 0.25);
 
+  //Turn coordinates into a grid
+  vec2 dotGridCoords = convertToGrid(coords);
+
+  //Draw circles inside gird of coordinates
+  float circles = circleSDF(dotGridCoords - 0.5, 0.25);
+
+  //Color Value
   vec3 color;
 
+  //all fragments on the coordinate system that are 0 and negative will be colored green
+  //all fragments on the coordinate system that are greater than 0 will be colored black
   circles <= 0.0
     ? color = vec3(0.0, 1.0, 0.0)
     : color = vec3(0.0, 0.0, 0.0);
 
-  gl_FragColor = vec4(vec2(gridCoords), 0.0, 1.0);
+  //visualize dotGridCoords
+  gl_FragColor = vec4(vec2(dotGridCoords), 0.0, 1.0);
+
+  //final shader output
   gl_FragColor = vec4(color, 1.0);
 }
