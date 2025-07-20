@@ -13,7 +13,7 @@ void main() {
   vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
 
   //Color of fragments
-  //(r, g, b) - vector 3 
+  //(r, g, b) - vector 3
   vec3 color;
 
   //radius
