@@ -3,8 +3,8 @@ uniform vec2 u_resolution;
 
 //Circle function
 //The length function is a built in GLSL function that finds the Euclidean Distance from the center to each fragment
-float circleSDF(vec2 coords, float size) {
-  return length(coords) - size;
+float circleSDF(vec2 coords, float radius) {
+  return length(coords) - radius;
 }
 
 void main() {

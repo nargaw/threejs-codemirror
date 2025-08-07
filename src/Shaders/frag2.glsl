@@ -3,15 +3,14 @@ uniform vec2 u_resolution;
 
 //Circle function
 //The length function is a built in GLSL function that finds the Euclidean Distance from the center to each fragment
-float circleSDF(vec2 coords, float size) {
-  return length(coords) - size;
+float circleSDF(vec2 coords, float radius) {
+  return length(coords) - radius;
 }
 
 //create a Coordinate of grids
 //first multiply by the gridSize
 //second take only the fractional part of the coordinate system
-vec2 convertToGrid(vec2 coords) {
-  float gridSize = 10.0;
+vec2 convertToGrid(vec2 coords, float gridSize) {
   vec2 gridCoords = fract(coords * gridSize);
   return gridCoords;
 }
@@ -21,7 +20,7 @@ void main(void ) {
   vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
 
   //Turn coordinates into a grid
-  vec2 dotGridCoords = convertToGrid(coords);
+  vec2 dotGridCoords = convertToGrid(coords, 10.);
 
   //Draw circles inside gird of coordinates
   float circles = circleSDF(dotGridCoords - 0.5, 0.25);
