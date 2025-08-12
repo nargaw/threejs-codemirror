@@ -36,10 +36,10 @@ void main(void ) {
   vec2 polarCoords = toPolarCoords(coords, u_time);
 
   //Turn coordinates into a grid
-  vec2 dotGridCoords = convertToGrid(polarCoords, 10.);
+  vec2 gridCoords = convertToGrid(polarCoords, 10.);
 
   //Draw circles inside gird of coordinates
-  float circles = circleSDF(dotGridCoords - 0.5, 0.25);
+  float circles = circleSDF(gridCoords - 0.5, 0.25);
 
   //Color Value
   vec3 color;

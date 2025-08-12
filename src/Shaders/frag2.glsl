@@ -20,10 +20,10 @@ void main(void ) {
   vec2 coords = (gl_FragCoord.xy - u_resolution.xy * 0.5) / u_resolution.y;
 
   //Turn coordinates into a grid
-  vec2 dotGridCoords = convertToGrid(coords, 10.);
+  vec2 gridCoords = convertToGrid(coords, 10.);
 
   //Draw circles inside gird of coordinates
-  float circles = circleSDF(dotGridCoords - 0.5, 0.25);
+  float circles = circleSDF(gridCoords - 0.5, 0.25);
 
   //Color Value
   vec3 color;
@@ -35,7 +35,7 @@ void main(void ) {
     : color = vec3(0.0, 0.0, 0.0);
 
   //visualize dotGridCoords
-  gl_FragColor = vec4(vec2(dotGridCoords), 0.0, 1.0);
+  gl_FragColor = vec4(vec2(gridCoords), 0.0, 1.0);
 
   //final shader output
   gl_FragColor = vec4(color, 1.0);
