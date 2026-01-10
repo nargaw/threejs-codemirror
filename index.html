@@ -4,34 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Drawing with Math - Pixel Shaders</title>
+    <title>Shader Daily 2K</title>
   </head>
   <body>
+    
+    
     <nav class="tabs">
-      <a href="#0" class="tab">Home</a>
-      <a href="#1" class="tab">1</a>
-      <a href="#2" class="tab">2</a>
-      <a href="#3" class="tab">3</a>
-      <a href="#4" class="tab">4</a>
-      <button id="toggle-btn" class="tab toggle">Hide Editor</button>
+      <div class="nav">
+      <div class="flip-nav">
+        <button id="back-btn">back</button>
+        <button id="next-btn">next</button>
+      </div>
+    
+      <form id='myForm'>
+          <input class="text-box" type="number" name="shader" placeholder="Enter Shader Number" className="input" />
+          <input class="submit-btn" type="submit"  value="Submit" />
+      </form>
+      </div>
+    <button id="toggle-btn" class="tab toggle">Hide Editor</button>
     </nav>
     <div id="app"></div>
     <div id="editor"></div>
     <canvas id="webgl"></canvas>
     <script type="module" src="/src/main.js"></script>
-    <script>
-      const setActiveTab = () => {
-        const currentHash = window.location.hash || '#0';
-        document.querySelectorAll('.tab').forEach((tab) => {
-          tab.classList.toggle(
-            'active',
-            tab.getAttribute('href') === currentHash
-          );
-        });
-      };
-
-      window.addEventListener('hashchange', setActiveTab);
-      window.addEventListener('load', setActiveTab);
-    </script>
   </body>
 </html>
