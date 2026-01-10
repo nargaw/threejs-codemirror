@@ -50,8 +50,9 @@ const fragments = {
 };
 
 //get fragment shader
-const getPageNumber = () => location.hash.replace('#', '') || '0';
-let currentFragment = fragments[getPageNumber()] || fragments[0];
+let currentFragment = fragments[0];
+let fragmentNumber = 0
+const maxFragmentNumber = 4
 
 //shader plane
 const planeGeometry = new THREE.PlaneGeometry(2, 2);
@@ -104,7 +105,45 @@ const view = new EditorView({
 });
 
 const toggleBtn = document.getElementById('toggle-btn');
+const backBtn = document.getElementById('back-btn')
+const nextBtn = document.getElementById('next-btn')
+const formSubmitBtn = document.getElementById('myForm')
 const editorElement = document.querySelector('#editor');
+
+backBtn.addEventListener('click', () => {
+  // console.log(getPageNumber() - 1)
+  if(fragmentNumber > 0){
+    fragmentNumber -= 1
+  }
+  
+  const frag = fragments[fragmentNumber] || fragments[0];
+  loadShader(frag);
+})
+
+nextBtn.addEventListener('click', () => {
+  if(fragmentNumber < maxFragmentNumber){
+    fragmentNumber += 1
+  }
+  
+  const frag = fragments[fragmentNumber] || fragments[0];
+  loadShader(frag);
+})
+
+formSubmitBtn.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  const form = e.target
+  const formData = new FormData(form)
+  const formJson = Object.fromEntries(formData.entries())
+  const num = parseInt(formJson.shader)
+  
+  if(!Number.isNaN(num) && num >= 0 && num <= maxFragmentNumber){
+      const frag = fragments[num] || fragments[0]; 
+      loadShader(frag)
+  }
+
+  document.getElementById("myForm").reset();
+})
 
 toggleBtn.addEventListener('click', () => {
   const isHidden = editorElement.style.display === 'none';
@@ -120,13 +159,6 @@ const loadShader = (frag) => {
   planeMaterial.fragmentShader = frag;
   planeMaterial.needsUpdate = true;
 };
-
-//listen for hash change
-window.addEventListener('hashchange', () => {
-  const newPage = getPageNumber();
-  const frag = fragments[newPage] || fragments[0];
-  loadShader(frag);
-});
 
 //resize
 window.onresize = () => {
