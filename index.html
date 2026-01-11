@@ -9,20 +9,25 @@
   <body>
     
     
-    <nav class="tabs">
+    <div class="tabs">
       <div class="nav">
-      <div class="flip-nav">
-        <button id="back-btn">back</button>
-        <button id="next-btn">next</button>
-      </div>
+        <div class="flip-nav">
+          <div class="tab">
+            <button id="back-btn">back</button>
+          </div>
+          <div id="current-shader-label"></div>
+          <div class="tab">
+            <button id="next-btn" >next</button>
+          </div>
+        </div>
     
-      <form id='myForm'>
-          <input class="text-box" type="number" name="shader" placeholder="Enter Shader Number" className="input" />
-          <input class="submit-btn" type="submit"  value="Submit" />
-      </form>
+        <form id='myForm'>
+            <input class="text-box tab" type="number" name="shader" placeholder="Enter Shader Number" className="input" />
+            <input class="submit-btn tab" type="submit"  value="Submit" />
+        </form>
+        <button id="toggle-btn" class="tab toggle">Hide Editor</button>
       </div>
-    <button id="toggle-btn" class="tab toggle">Hide Editor</button>
-    </nav>
+    </div>
     <div id="app"></div>
     <div id="editor"></div>
     <canvas id="webgl"></canvas>
