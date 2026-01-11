@@ -109,6 +109,9 @@ const backBtn = document.getElementById('back-btn')
 const nextBtn = document.getElementById('next-btn')
 const formSubmitBtn = document.getElementById('myForm')
 const editorElement = document.querySelector('#editor');
+const label = document.querySelector('#current-shader-label')
+
+label.innerHTML = 0
 
 backBtn.addEventListener('click', () => {
   // console.log(getPageNumber() - 1)
@@ -118,6 +121,8 @@ backBtn.addEventListener('click', () => {
   
   const frag = fragments[fragmentNumber] || fragments[0];
   loadShader(frag);
+  label.innerHTML = fragmentNumber || 0
+  console.log(label.innerHTML)
 })
 
 nextBtn.addEventListener('click', () => {
@@ -127,6 +132,7 @@ nextBtn.addEventListener('click', () => {
   
   const frag = fragments[fragmentNumber] || fragments[0];
   loadShader(frag);
+  label.innerHTML = fragmentNumber || 0
 })
 
 formSubmitBtn.addEventListener('submit', (e) => {
@@ -141,7 +147,8 @@ formSubmitBtn.addEventListener('submit', (e) => {
       const frag = fragments[num] || fragments[0]; 
       loadShader(frag)
   }
-
+  // label.innerHTML.replace(fragmentNumber)
+  label.innerHTML = num || 0
   document.getElementById("myForm").reset();
 })
 
