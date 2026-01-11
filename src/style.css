@@ -44,16 +44,25 @@
   background-color: #1f1f1f;
 }
 
+
 /* Navigation Tabs */
-.tabs {
+.nav {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   background: #333;
-  padding: 0.5rem;
+  padding: 10px;
+  /* height: 50px; */
+}
+
+.flip-nav{
+  /* height: 50px; */
+  /* font-size: 50px; */
 }
 
 .tab {
   color: white;
-  padding: 0.5rem 1rem;
+  /* padding: 10px; */
   text-decoration: none;
   border-bottom: 2px solid transparent;
   transition:
@@ -69,3 +78,7 @@
   border-bottom: 2px solid #00f;
   font-weight: bold;
 }
+
+/* .text-box{
+  width: 100px;
+} */
