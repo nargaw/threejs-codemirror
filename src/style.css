@@ -46,23 +46,46 @@
 
 
 /* Navigation Tabs */
-.nav {
+.flip-nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
   background: #333;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   /* height: 50px; */
 }
 
 .flip-nav{
-  /* height: 50px; */
+  height: 50px;
   /* font-size: 50px; */
+}
+
+.counter{
+  text-align: center;
+  padding: 0;
+  width: 50px;
+  height: 100%;
+}
+
+.submit-btn{
+  height: 100%;
+  margin: 0;
+  
+}
+
+.back-btn{
+  width: 100px;
+}
+
+.next-btn{
+  width: 100px;
 }
 
 .tab {
   color: white;
-  /* padding: 10px; */
+  padding-left: 10px;
+  padding-right: 10px;
   text-decoration: none;
   border-bottom: 2px solid transparent;
   transition:
@@ -79,6 +102,7 @@
   font-weight: bold;
 }
 
-/* .text-box{
-  width: 100px;
-} */
+.text-box{
+  height: 100%;
+  width: 126px;
+}
