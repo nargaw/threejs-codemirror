@@ -7,26 +7,20 @@
     <title>Shader Daily 2K</title>
   </head>
   <body>
+    <div class="flip-nav">
+      
+      <form id='myForm' class="tab form input">
+        <input class="text-box tab" type="number" name="shader" placeholder="Enter Shader Number" />
+        <input class="submit-btn tab" type="submit"  value="Submit" />
+      </form>
+
+      
+        <button id="back-btn" class="back-btn nav">back</button>
+        <p id="current-shader-label" class="counter"></p>
+        <button id="next-btn" class="next-btn nav" >next</button>
     
-    
-    <div class="tabs">
-      <div class="nav">
-        <div class="flip-nav">
-          <div class="tab">
-            <button id="back-btn">back</button>
-          </div>
-          <div id="current-shader-label"></div>
-          <div class="tab">
-            <button id="next-btn" >next</button>
-          </div>
-        </div>
-    
-        <form id='myForm'>
-            <input class="text-box tab" type="number" name="shader" placeholder="Enter Shader Number" className="input" />
-            <input class="submit-btn tab" type="submit"  value="Submit" />
-        </form>
-        <button id="toggle-btn" class="tab toggle">Hide Editor</button>
-      </div>
+      
+      <button id="toggle-btn" class="tab toggle">Hide Editor</button>
     </div>
     <div id="app"></div>
     <div id="editor"></div>
